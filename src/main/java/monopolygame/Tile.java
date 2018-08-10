@@ -8,10 +8,12 @@ public abstract class Tile {
         this.name = name;
     }
 
-    public abstract void action(Player player);
-
     public String getName() {
         return name;
     }
+
+    public abstract void update(Player player);
+
+
 
 }

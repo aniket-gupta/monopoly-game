@@ -7,7 +7,7 @@ public class GO extends Tile {
     }
 
     @Override
-    public void action(Player player) {
+    public void update(Player player) {
         player.collect(200);
     }
 }

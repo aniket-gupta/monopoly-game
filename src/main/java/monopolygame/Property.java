@@ -36,12 +36,12 @@ public class Property extends Tile {
         rentLevel = 0;
     }
 
-    public void incRentLevel() {
+    void incRentLevel() {
         if(rentLevel + 1 >= rentPerLevel.length) return;
         rentLevel++;
     }
 
-    public void decRentLevel() {
+    void decRentLevel() {
         if(rentLevel - 1 < 0) return;
         rentLevel--;
     }
@@ -81,7 +81,7 @@ public class Property extends Tile {
     }
 
     @Override
-    public void action(Player player) {
+    public void update(Player player) {
         player.landOn(this);
     }
 }

@@ -54,7 +54,7 @@ public class SpecialTile extends Tile {
 
 
     @Override
-    public void action(Player player) {
+    public void update(Player player) {
         incrRentLevel(player);
         decrRentLevelForOpponents(player);
     }

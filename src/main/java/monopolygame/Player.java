@@ -70,10 +70,6 @@ public class Player {
         }
     }
 
-    public void landOn(SpecialTile specialTile) {
-
-    }
-
     public List<Property> getOwnedProperty() {
         return ownedProperties;
     }

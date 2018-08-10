@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * Hello world!
  */
-public class App {
+public class Board {
     public static void main(String[] args) {
         String[] inputs = {
                 "Player A lands on Bombay",
@@ -74,9 +74,7 @@ public class App {
             Player player = map.get(playerName);
 
             Tile tile = tilemap.get(tileName);
-            tile.action(player);
-//            player.landOn(property);
-
+            tile.update(player);
         }
 
         System.out.println("Players:");
