@@ -3,17 +3,15 @@ package monopolygame;
 import monopolygame.input.InputParser;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Arrays;
 import java.util.LinkedHashMap;
+import java.util.List;
 
 /**
  * Hello world!
- *
  */
-public class App 
-{
-    public static void main( String[] args )
-    {
+public class App {
+    public static void main(String[] args) {
         String[] inputs = {
                 "Player A lands on Bombay",
                 "Player B lands on Delhi",
@@ -37,55 +35,60 @@ public class App
 
         SpecialTile specialTile = new SpecialTile(new ArrayList<Player>(map
                 .values()));
-        GoTile goTile = new GoTile();
+        GO goTile = new GO();
 
-        LinkedHashMap<String, Property> propertyMap = new LinkedHashMap<>();
+        LinkedHashMap<String, Tile> tilemap = new
+                LinkedHashMap<>();
 
-        propertyMap.put("Cochin", new Property("Cochin", 120, Color.Green,
-                new int[] {100,160,260,440,860}));
-        propertyMap.put("Ooty", new Property("Ooty", 400, Color.Green,
-                new int[] {300,400,560,810,1600}));
-        propertyMap.put("Bombay", new Property("Bombay", 500, Color.Red,
-                new int[] {400,520,680,900,1800}));
+        tilemap.put(goTile.getName(), goTile);
+        tilemap.put(specialTile.getName(), specialTile);
 
-        propertyMap.put("Ahmedabad", new Property("Ahmedabad", 300, Color.Red,
-                new int[] {200,350,480,800,1200}));
-        propertyMap.put("Chennai", new Property("Chennai", 700, Color.Blue,
-                new int[] {600,900,1250,1500,1900}));
-        propertyMap.put("Bangalore", new Property("Bangalore", 450, Color.Blue,
-                new int[] {300,400,560,810,1600}));
-        propertyMap.put("Delhi", new Property("Delhi", 500, Color.Yellow,
-                new int[] {400,520,680,900,1800}));
-        propertyMap.put("Darjeeling", new Property("Darjeeling", 600, Color.Yellow,
-                new int[] {400,700,1000,1150,1400}));
+        List<Property> propertyList = Arrays.asList(
+                new Property("Cochin", 120, Color.Green,
+                        new int[]{100, 160, 260, 440, 860}),
+                new Property("Ooty", 400, Color.Green,
+                        new int[]{300, 400, 560, 810, 1600}),
+                new Property("Bombay", 500, Color.Red,
+                        new int[]{400, 520, 680, 900, 1800}),
+                new Property("Ahmedabad", 300, Color.Red,
+                        new int[]{200, 350, 480, 800, 1200}),
+                new Property("Chennai", 700, Color.Blue,
+                        new int[]{600, 900, 1250, 1500, 1900}),
+                new Property("Bangalore", 450, Color.Blue,
+                        new int[]{300, 400, 560, 810, 1600}),
+                new Property("Delhi", 500, Color.Yellow,
+                        new int[]{400, 520, 680, 900, 1800}),
+                new Property("Darjeeling", 600, Color.Yellow,
+                        new int[]{400, 700, 1000, 1150, 1400})
+        );
+
+        for (Property property : propertyList) {
+            tilemap.put(property.getName(), property);
+        }
 
 
-        for(String input : inputs) {
+        for (String input : inputs) {
             InputParser inputParser = new InputParser(input);
             String playerName = inputParser.getPlayerName();
             String tileName = inputParser.getTileName();
             Player player = map.get(playerName);
-            if(tileName.equalsIgnoreCase("GO")) {
-                goTile.performAction(player);
-            } else if(tileName.equalsIgnoreCase("Special")) {
-                specialTile.performAction(player);
-            } else {
-                Property property = propertyMap.get(tileName);
-                player.landOn(property);
-            }
+
+            Tile tile = tilemap.get(tileName);
+            tile.action(player);
+//            player.landOn(property);
+
         }
 
         System.out.println("Players:");
-        for(Player player : map.values()) {
+        for (Player player : map.values()) {
             System.out.println(player);
         }
 
         System.out.println();
         System.out.println("Properties");
-        for (Property property : propertyMap.values()) {
+        for (Property property : propertyList) {
             System.out.println(property);
         }
-
 
     }
 }

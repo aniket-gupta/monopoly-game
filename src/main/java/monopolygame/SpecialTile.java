@@ -3,17 +3,13 @@ package monopolygame;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SpecialTile {
+public class SpecialTile extends Tile {
 
     private List<Player> players;
 
     public SpecialTile(List<Player> players) {
+        super("Special");
         this.players = players;
-    }
-
-    public void performAction(Player player) {
-        incrRentLevel(player);
-        decrRentLevelForOpponents(player);
     }
 
     private void decrRentLevelForOpponents(Player player) {
@@ -57,4 +53,9 @@ public class SpecialTile {
     }
 
 
+    @Override
+    public void action(Player player) {
+        incrRentLevel(player);
+        decrRentLevelForOpponents(player);
+    }
 }

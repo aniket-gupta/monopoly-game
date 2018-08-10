@@ -1,6 +1,6 @@
 package monopolygame;
 
-public class Property {
+public class Property extends Tile {
 
     /**
      * 8. Property has the cost value
@@ -11,7 +11,7 @@ public class Property {
      * 13. Rent level cannot go lower than 1.
      */
 
-    private String name;
+
     private int cost;
     private Color color;
     private Player owner;
@@ -19,7 +19,7 @@ public class Property {
     private int[] rentPerLevel;
 
     public Property(String name, int cost, Color color, int[] rentPerLevel) {
-        this.name = name;
+        super(name);
         this.cost = cost;
         this.color = color;
 
@@ -29,6 +29,7 @@ public class Property {
         }
         rentLevel = -1;
     }
+
 
     public void setOwner(Player player) {
         this.owner = player;
@@ -68,7 +69,7 @@ public class Property {
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(name + " {");
+        stringBuilder.append(getName() + " {");
         stringBuilder.append("Owner: " + (owner == null ? "None (For sale)" :
                 owner.getName()));
         stringBuilder.append(", Current Rent Level: " + (owner == null ?
@@ -79,4 +80,8 @@ public class Property {
 
     }
 
+    @Override
+    public void action(Player player) {
+        player.landOn(this);
+    }
 }
