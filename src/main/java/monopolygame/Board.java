@@ -1,92 +1,93 @@
 package monopolygame;
 
 import monopolygame.input.InputParser;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.LinkedHashMap;
-import java.util.List;
+import java.util.*;
 
-/**
- * Hello world!
- */
+
 public class Board {
-    public static void main(String[] args) {
-        String[] inputs = {
-                "Player A lands on Bombay",
-                "Player B lands on Delhi",
-                "Player C lands on Chennai",
-                "Player A lands on Special",
-                "Player B lands on Bombay",
-                "Player C lands on Ooty",
-                "Player A lands on Ahmedabad",
-                "Player B lands on Darjeeling",
-                "Player C lands on Special",
-                "Player A lands on Delhi",
-                "Player B crosses GO",
-                "Player C lands on Bombay"
-        };
 
-        LinkedHashMap<String, Player> map = new LinkedHashMap<>();
+    private Map<String, Player> playerMap = new
+            LinkedHashMap<>();
+    private Map<String, Tile> tilemap = new
+            LinkedHashMap<>();
+    private List<Property> propertyList = new ArrayList<>();
 
-        map.put("Player A", new Player("Player A"));
-        map.put("Player B", new Player("Player B"));
-        map.put("Player C", new Player("Player C"));
+    public Board(String jsonStr) {
+        initialize(jsonStr);
+    }
 
-        SpecialTile specialTile = new SpecialTile(new ArrayList<Player>(map
-                .values()));
+    private void initialize(String jsonStr) {
+        JSONObject jsonObject = new JSONObject(jsonStr);
+        JSONArray playersJsonArr = jsonObject.getJSONArray("players");
+        if(playersJsonArr == null) {
+            throw new IllegalArgumentException("Invalid json string");
+        }
+        initializePlayer(playersJsonArr);
+        JSONArray propertiesJsonArr = jsonObject.getJSONArray("properties");
+        if(propertiesJsonArr == null) {
+            throw new IllegalArgumentException("Invalid json string");
+        }
+        initializeProperties(propertiesJsonArr);
+    }
+
+    public void processCommand(String input) {
+        InputParser inputParser = new InputParser(input);
+        String playerName = inputParser.getPlayerName();
+        String tileName = inputParser.getTileName();
+        Player player = playerMap.get(playerName);
+        Tile tile = tilemap.get(tileName);
+        tile.update(player);
+    }
+
+    public List<Player> getPlayers() {
+        return new ArrayList<>(playerMap.values());
+    }
+
+    public List<Property> getPropertis() {
+        return propertyList;
+    }
+
+    private void initializeProperties(JSONArray propertiesJsonArr) {
+        for (int i = 0; i < propertiesJsonArr.length(); i++) {
+            JSONObject prop = propertiesJsonArr.getJSONObject(i);
+            String name = prop.getString("name");
+            int cost = prop.getInt("cost");
+            String color = prop.getString("color");
+            JSONArray rentJsonArr = prop.getJSONArray("rentPerLevel");
+            int[] rentPerLevel = new int[rentJsonArr.length()];
+            for (int j = 0; j < rentJsonArr.length(); j++) {
+                rentPerLevel[j] = rentJsonArr.getInt(j);
+            }
+
+            Property property = new Property(name, cost, Color.valueOf(color)
+                    , rentPerLevel);
+            propertyList.add(property);
+
+        }
+
+        SpecialTile specialTile = new SpecialTile(new ArrayList<Player>(playerMap.values()));
         GO goTile = new GO();
 
-        LinkedHashMap<String, Tile> tilemap = new
-                LinkedHashMap<>();
 
         tilemap.put(goTile.getName(), goTile);
         tilemap.put(specialTile.getName(), specialTile);
 
-        List<Property> propertyList = Arrays.asList(
-                new Property("Cochin", 120, Color.Green,
-                        new int[]{100, 160, 260, 440, 860}),
-                new Property("Ooty", 400, Color.Green,
-                        new int[]{300, 400, 560, 810, 1600}),
-                new Property("Bombay", 500, Color.Red,
-                        new int[]{400, 520, 680, 900, 1800}),
-                new Property("Ahmedabad", 300, Color.Red,
-                        new int[]{200, 350, 480, 800, 1200}),
-                new Property("Chennai", 700, Color.Blue,
-                        new int[]{600, 900, 1250, 1500, 1900}),
-                new Property("Bangalore", 450, Color.Blue,
-                        new int[]{300, 400, 560, 810, 1600}),
-                new Property("Delhi", 500, Color.Yellow,
-                        new int[]{400, 520, 680, 900, 1800}),
-                new Property("Darjeeling", 600, Color.Yellow,
-                        new int[]{400, 700, 1000, 1150, 1400})
-        );
-
         for (Property property : propertyList) {
             tilemap.put(property.getName(), property);
         }
-
-
-        for (String input : inputs) {
-            InputParser inputParser = new InputParser(input);
-            String playerName = inputParser.getPlayerName();
-            String tileName = inputParser.getTileName();
-            Player player = map.get(playerName);
-
-            Tile tile = tilemap.get(tileName);
-            tile.update(player);
-        }
-
-        System.out.println("Players:");
-        for (Player player : map.values()) {
-            System.out.println(player);
-        }
-
-        System.out.println();
-        System.out.println("Properties");
-        for (Property property : propertyList) {
-            System.out.println(property);
-        }
-
     }
+
+    private  void initializePlayer(JSONArray playersJsonArr) {
+        Iterator<Object> iterator = playersJsonArr.iterator();
+        while (iterator.hasNext()) {
+            String playerName = (String) iterator.next();
+            Player player = new Player(playerName);
+            playerMap.put(player.getName(), player);
+        }
+    }
+
+
 }

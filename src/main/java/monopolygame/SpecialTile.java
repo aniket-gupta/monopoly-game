@@ -8,7 +8,7 @@ public class SpecialTile extends Tile {
     private List<Player> players;
 
     public SpecialTile(List<Player> players) {
-        super("Special");
+        super("Special", Color.None);
         this.players = players;
     }
 
@@ -54,7 +54,7 @@ public class SpecialTile extends Tile {
 
 
     @Override
-    public void update(Player player) {
+    protected void performAction(Player player) {
         incrRentLevel(player);
         decrRentLevelForOpponents(player);
     }

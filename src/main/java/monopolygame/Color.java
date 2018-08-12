@@ -2,6 +2,6 @@ package monopolygame;
 
 public enum Color {
 
-    Green, Red, Blue, Yellow
+    Green, Red, Blue, Yellow, None
 
 }

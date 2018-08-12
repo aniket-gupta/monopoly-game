@@ -14,7 +14,6 @@ public class Player {
 
     private String name;
     private int money;
-    private boolean isBankrupt;
     private List<Property> ownedProperties;
 
     public Player(String name) {
@@ -36,7 +35,7 @@ public class Player {
     }
 
     public boolean isBankrupt() {
-        return isBankrupt;
+        return money <= 0;
     }
 
     public void collect(int amount) {
@@ -55,11 +54,12 @@ public class Player {
     public void buyProperty(Property property) {
         if(property.getOwner() != null)
             throw new AlreadySoldException();
-        if(money < property.getCost())
-            throw new InsufficientBalanceException();
-        money -= property.getCost();
-        property.setOwner(this);
-        ownedProperties.add(property);
+        if(money >= property.getCost()) {
+
+            money -= property.getCost();
+            property.setOwner(this);
+            ownedProperties.add(property);
+        }
     }
 
     public void landOn(Property property) {

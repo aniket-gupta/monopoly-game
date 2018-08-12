@@ -3,11 +3,11 @@ package monopolygame;
 public class GO extends Tile {
 
     public GO() {
-        super("GO");
+        super("GO", Color.None);
     }
 
     @Override
-    public void update(Player player) {
+    protected void performAction(Player player) {
         player.collect(200);
     }
 }

@@ -13,15 +13,13 @@ public class Property extends Tile {
 
 
     private int cost;
-    private Color color;
     private Player owner;
     private int rentLevel;
     private int[] rentPerLevel;
 
     public Property(String name, int cost, Color color, int[] rentPerLevel) {
-        super(name);
+        super(name, color);
         this.cost = cost;
-        this.color = color;
 
         this.rentPerLevel = new int[rentPerLevel.length];
         for(int i = 0; i < rentPerLevel.length; i++) {
@@ -55,11 +53,11 @@ public class Property extends Tile {
     }
 
     public int currentRent() {
-        return rentPerLevel[rentLevel];
+        return rentLevel >= 0 ?rentPerLevel[rentLevel] : 0;
     }
 
-    public Color getColor() {
-        return color;
+    public int currentRentLevel() {
+        return rentLevel;
     }
 
     public int getCost() {
@@ -74,14 +72,14 @@ public class Property extends Tile {
                 owner.getName()));
         stringBuilder.append(", Current Rent Level: " + (owner == null ?
                 "N/A" : rentLevel + 1));
-        stringBuilder.append(", Color: " + color);
+        stringBuilder.append(", Color: " + getColor());
         stringBuilder.append("}");
         return stringBuilder.toString();
 
     }
 
     @Override
-    public void update(Player player) {
+    protected void performAction(Player player) {
         player.landOn(this);
     }
 }
