@@ -1,6 +1,6 @@
 package monopolygame;
 
-import monopolygame.input.InputParser;
+import monopolygame.io.InputParser;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -39,7 +39,7 @@ public class Board {
         String tileName = inputParser.getTileName();
         Player player = playerMap.get(playerName);
         Tile tile = tilemap.get(tileName);
-        tile.update(player);
+        tile.playerLanded(player);
     }
 
     public List<Player> getPlayers() {

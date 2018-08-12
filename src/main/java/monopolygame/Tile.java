@@ -18,7 +18,7 @@ public abstract class Tile {
         return color;
     }
 
-    public  void update(Player player) {
+    public  void playerLanded(Player player) {
         performAction(player);
     }
 

@@ -52,8 +52,11 @@ public class Player {
     }
 
     public void buyProperty(Property property) {
+        if(property.getOwner() != null && property.getOwner().equals(this))
+            return;
         if(property.getOwner() != null)
             throw new AlreadySoldException();
+
         if(money >= property.getCost()) {
 
             money -= property.getCost();

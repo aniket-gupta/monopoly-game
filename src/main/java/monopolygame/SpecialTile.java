@@ -31,7 +31,8 @@ public class SpecialTile extends Tile {
 
     private void incrRentLevel(Player player) {
         Property targetProperty = getHighestValuePropertyOfPlayer(player);
-        targetProperty.incRentLevel();
+        if(targetProperty != null)
+            targetProperty.incRentLevel();
     }
 
     private Property getHighestValuePropertyOfPlayer(Player player) {
@@ -49,7 +50,8 @@ public class SpecialTile extends Tile {
 
     private void decrRentLevel(Player player) {
         Property targetProperty = getHighestValuePropertyOfPlayer(player);
-        targetProperty.decRentLevel();
+        if(targetProperty != null)
+            targetProperty.decRentLevel();
     }
 
 

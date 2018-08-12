@@ -20,7 +20,8 @@ public class Property extends Tile {
     public Property(String name, int cost, Color color, int[] rentPerLevel) {
         super(name, color);
         this.cost = cost;
-
+        if (rentPerLevel == null || rentPerLevel.length == 0)
+            throw new IllegalArgumentException();
         this.rentPerLevel = new int[rentPerLevel.length];
         for(int i = 0; i < rentPerLevel.length; i++) {
             this.rentPerLevel[i] = rentPerLevel[i];
