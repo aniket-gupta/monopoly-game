@@ -2,6 +2,138 @@
 
 Monopoly is a classic board game where players roll two six-sided dice to move around the game board, buying and trading properties.
 
+## How to run code
+```sh
+mvn clean install assembly:single
+java -jar target/bankerless-monopolygame-1.0-SNAPSHOT-jar-with-dependencies.jar test-data/sample-input.json
+```
+
+example input file
+```json
+{
+  "init": {
+    "players": [
+      "Player A",
+      "Player B",
+      "Player C"
+    ],
+    "properties": [
+      {
+        "name": "Cochin",
+        "cost": 120,
+        "color": "Green",
+        "rentPerLevel": [
+          100,
+          160,
+          260,
+          440,
+          860
+        ]
+      },
+      {
+        "name": "Ooty",
+        "cost": 400,
+        "color": "Green",
+        "rentPerLevel": [
+          300,
+          400,
+          560,
+          810,
+          1600
+        ]
+      },
+      {
+        "name": "Bombay",
+        "cost": 500,
+        "color": "Red",
+        "rentPerLevel": [
+          400,
+          520,
+          680,
+          900,
+          1800
+        ]
+      },
+      {
+        "name": "Ahmedabad",
+        "cost": 300,
+        "color": "Red",
+        "rentPerLevel": [
+          200,
+          350,
+          480,
+          800,
+          1200
+        ]
+      },
+      {
+        "name": "Chennai",
+        "cost": 700,
+        "color": "Blue",
+        "rentPerLevel": [
+          600,
+          900,
+          1250,
+          1500,
+          1900
+        ]
+      },
+      {
+        "name": "Bangalore",
+        "cost": 450,
+        "color": "Blue",
+        "rentPerLevel": [
+          300,
+          400,
+          560,
+          810,
+          1600
+        ]
+      },
+      {
+        "name": "Delhi",
+        "cost": 500,
+        "color": "Yellow",
+        "rentPerLevel": [
+          400,
+          520,
+          680,
+          900,
+          1800
+        ]
+      },
+      {
+        "name": "Darjeeling",
+        "cost": 600,
+        "color": "Yellow",
+        "rentPerLevel": [
+          400,
+          700,
+          1000,
+          1150,
+          1400
+        ]
+      }
+    ]
+  },
+  "input": [
+    "Player A lands on Bombay",
+    "Player B lands on Delhi",
+    "Player C lands on Chennai",
+    "Player A lands on Special",
+    "Player B lands on Bombay",
+    "Player C lands on Ooty",
+    "Player A lands on Ahmedabad",
+    "Player B lands on Darjeeling",
+    "Player C lands on Special",
+    "Player A lands on Delhi",
+    "Player B crosses GO",
+    "Player C lands on Bombay"
+  ]
+}
+```
+
+
 ## User story
 
 1. Each player is seeded with $2,000 at the beginning of the game by the banker.
