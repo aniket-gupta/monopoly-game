@@ -1,4 +1,4 @@
-package monopolygame.input;
+package monopolygame.io;
 
 public class InputParser {
 
