@@ -1,0 +1,187 @@
+{
+  "init": {
+    "players": [
+      "Player A",
+      "Player B",
+      "Player C"
+    ],
+    "properties": [
+      {
+        "name": "Cochin",
+        "cost": 120,
+        "color": "Green",
+        "rentPerLevel": [
+          100,
+          160,
+          260,
+          440,
+          860
+        ]
+      },
+      {
+        "name": "Ooty",
+        "cost": 400,
+        "color": "Green",
+        "rentPerLevel": [
+          300,
+          400,
+          560,
+          810,
+          1600
+        ]
+      },
+      {
+        "name": "Bombay",
+        "cost": 500,
+        "color": "Red",
+        "rentPerLevel": [
+          400,
+          520,
+          680,
+          900,
+          1800
+        ]
+      },
+      {
+        "name": "Ahmedabad",
+        "cost": 300,
+        "color": "Red",
+        "rentPerLevel": [
+          200,
+          350,
+          480,
+          800,
+          1200
+        ]
+      },
+      {
+        "name": "Chennai",
+        "cost": 700,
+        "color": "Blue",
+        "rentPerLevel": [
+          600,
+          900,
+          1250,
+          1500,
+          1900
+        ]
+      },
+      {
+        "name": "Bangalore",
+        "cost": 450,
+        "color": "Blue",
+        "rentPerLevel": [
+          300,
+          400,
+          560,
+          810,
+          1600
+        ]
+      },
+      {
+        "name": "Delhi",
+        "cost": 500,
+        "color": "Yellow",
+        "rentPerLevel": [
+          400,
+          520,
+          680,
+          900,
+          1800
+        ]
+      },
+      {
+        "name": "Darjeeling",
+        "cost": 600,
+        "color": "Yellow",
+        "rentPerLevel": [
+          400,
+          700,
+          1000,
+          1150,
+          1400
+        ]
+      }
+    ]
+  },
+  "input": [
+    "Player A lands on Bombay",
+    "Player B lands on Delhi",
+    "Player C lands on Chennai",
+    "Player A lands on Special",
+    "Player B lands on Bombay",
+    "Player C lands on Ooty",
+    "Player A lands on Ahmedabad",
+    "Player B lands on Darjeeling",
+    "Player C lands on Special",
+    "Player A lands on Delhi",
+    "Player B crosses GO",
+    "Player C lands on Bombay"
+  ],
+  "expectedOutput": {
+    "players": [
+      {
+        "name": "Player A",
+        "balance": 800
+      },
+      {
+        "name": "Player B",
+        "balance": 580
+      },
+      {
+        "name": "Player C",
+        "balance": 380
+      }
+    ],
+    "properties": [
+      {
+        "name": "Cochin",
+        "owner": "None (For sale)",
+        "currentRentLevel": "N/A",
+        "color": "Green"
+      },
+      {
+        "name": "Ooty",
+        "owner": "Player C",
+        "currentRentLevel": "1",
+        "color": "Green"
+      },
+      {
+        "name": "Bombay",
+        "owner": "Player A",
+        "currentRentLevel": "3",
+        "color": "Red"
+      },
+      {
+        "name": "Ahmedabad",
+        "owner": "Player A",
+        "currentRentLevel": "1",
+        "color": "Red"
+      },
+      {
+        "name": "Chennai",
+        "owner": "Player C",
+        "currentRentLevel": "1",
+        "color": "Blue"
+      },
+      {
+        "name": "Bangalore",
+        "owner": "None (For sale)",
+        "currentRentLevel": "N/A",
+        "color": "Blue"
+      },
+      {
+        "name": "Delhi",
+        "owner": "Player B",
+        "currentRentLevel": "2",
+        "color": "Yellow"
+      },
+      {
+        "name": "Darjeeling",
+        "owner": "Player B",
+        "currentRentLevel": "1",
+        "color": "Yellow"
+      }
+    ]
+  }
+}
