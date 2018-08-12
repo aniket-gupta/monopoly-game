@@ -1,6 +1,6 @@
 package monopolygame;
 
-import monopolygame.input.InputParser;
+import monopolygame.io.InputParser;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -110,7 +110,7 @@ public class EndToEndTest {
             Player player = playerMap.get(playerName);
 
             Tile tile = tilemap.get(tileName);
-            tile.update(player);
+            tile.playerLanded(player);
         }
     }
 }
