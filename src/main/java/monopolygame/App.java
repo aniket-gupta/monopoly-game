@@ -21,8 +21,12 @@ public class App {
         Board board = new Board(initJsonObject.toString());
         JSONArray inputJsonArr = jsonObject.getJSONArray("input");
 
-        for(int i = 0; i < inputJsonArr.length(); i++) {
-            board.processCommand(inputJsonArr.getString(i));
+        try {
+            for (int i = 0; i < inputJsonArr.length(); i++) {
+                board.processCommand(inputJsonArr.getString(i));
+            }
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
         }
         List<Player> players = board.getPlayers();
 
