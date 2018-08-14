@@ -4,6 +4,8 @@ Monopoly is a classic board game where players roll two six-sided dice to move a
 
 ## How to run code
 ```sh
+git clone https://github.com/aniket-gupta/monopoly-game.git
+cd monopoly-game
 mvn clean install assembly:single
 java -jar target/bankerless-monopolygame-1.0-SNAPSHOT-jar-with-dependencies.jar test-data/sample-input.json
 ```
